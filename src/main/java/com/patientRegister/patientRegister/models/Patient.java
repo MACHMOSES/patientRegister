@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = 'patient')
+@Table( name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String gender;
     private String date;
-    private int phoneNumber;
-    private int idServiceNo
+    private String phoneNumber;
+    private String idServiceNo;
     private String name;
-    private String Purpose;
+    private String purpose;
     private String comment;
     private String followUp;
 }
