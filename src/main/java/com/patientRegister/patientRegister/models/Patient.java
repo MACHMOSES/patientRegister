@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = "patient")
+@Table(name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,4 +26,80 @@ public class Patient {
     private String purpose;
     private String comment;
     private String followUp;
+
+    // --- GETTERS ---
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getIdServiceNo() {
+        return idServiceNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getFollowUp() {
+        return followUp;
+    }
+
+    // --- SETTERS ---
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setIdServiceNo(String idServiceNo) {
+        this.idServiceNo = idServiceNo;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setFollowUp(String followUp) {
+        this.followUp = followUp;
+    }
 }

@@ -1,9 +1,9 @@
 {
   "name": "patientregister",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
-    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
+    "watch": "webpack --watch  --mode development --devtool source-map  --output-path ./target/classes/static/built --output-filename bundle.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.27.1",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.4",
     "sass-loader": "^16.0.5",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"

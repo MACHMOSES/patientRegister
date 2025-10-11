@@ -1,9 +1,9 @@
 {
     "presets": [
         [
-            "@babel/presets-env",
+            "@babel/preset-env",
             {
-                "target":{
+                "targets":{
                     "node":"current"
                 },
                 "useBuiltIns":"usage",
