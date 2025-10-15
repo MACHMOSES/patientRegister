@@ -22,7 +22,7 @@ public class Patient {
     private String date;
     private String phoneNumber;
     private String idServiceNo;
-    private String name;
+    private String fullName;
     private String purpose;
     private String comment;
     private String followUp;
@@ -49,8 +49,8 @@ public class Patient {
         return idServiceNo;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
     public String getPurpose() {
@@ -87,8 +87,8 @@ public class Patient {
         this.idServiceNo = idServiceNo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public void setPurpose(String purpose) {

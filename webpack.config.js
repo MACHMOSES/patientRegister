@@ -50,9 +50,9 @@ module.exports = {
   // Plugins for additional functionalities
   plugins: [
     new HtmlWebpackPlugin({
-      template: './target/classes/templates/index.html', // Path to your HTML template
+      template: './src/main/resources/static/index.html', // Path to your HTML template
       filename: 'index.html', // Output filename relative to output.path
-    }),
+    }), 
   ],
 
   // Resolve extensions for easier imports
