@@ -28,13 +28,13 @@ const LoginComponent = () =>{
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="border rounded-lg p-4" style={{ width: '500px', height: 'auto' }}>
                 <h2 className="mb-4 text-center">Login Page</h2>
-                <input placeholder='Email address' id='email' value={username} type='email' onChange={(e) => setUsername(e.target.value)}/>
-                <input placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input placeholder='Email addr' value={username} type='text' onChange={(e) => setUsername(e.target.value)}/>
+                <input placeholder='Password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                 {error && <p className="text-danger">{error}</p>} {/* Render error message if exists */}
 
                 <button className="mb-4 d-block btn-primary" style={{ height:'50px',width: '100%' }} onClick={handleLogin}>Sign in</button>
                 <div className="text-center">
-                        <p>Not a member? <a href="/signup" >Register</a></p>
+                        <p>Not a member? <a href="#signup" >Register</a></p>
                 </div>
                 
             </div>

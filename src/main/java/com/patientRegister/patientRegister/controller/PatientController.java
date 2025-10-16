@@ -6,7 +6,6 @@ import com.patientRegister.patientRegister.exceptions.ResourceNotFoundException;
 import com.patientRegister.patientRegister.repositories.PatientRepository;
 import com.patientRegister.patientRegister.repositories.UserRepository;
 import com.patientRegister.patientRegister.response.AuthResponse;
-import com.patientRegister.patientRegister.services.UserService;
 import com.patientRegister.patientRegister.services.UserServiceImplementation;
 import org.springframework.security.core.Authentication;
 import java.util.Optional;

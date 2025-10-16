@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {createRoot} from 'react-dom/client'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,10 +11,22 @@ import RegistarPatient from "../../../frontend/src/components/RegistarPatient/Re
 import SingUpComponent from "../../../frontend/src/components/SignUpComponent/SignUpComponent";
 import LoginComponent from "../../../frontend/src/components/LoginComponent.js/LoginComponent";
 import DashboardWelcome from "../../../frontend/src/components/Dashboard/DashboardWelcome";
+import NavComponent from "../../../frontend/src/components/NavComponent/NavComponent";
 
 const App = ()=> {
     const [patients, setPatients] = useState([])
     const [users, setUsers] = useState([])
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
+        const handleLoginSuccess = (token) => {
+            localStorage.setItem("token", token);
+            setIsLoggedIn(true);
+            };
+
+        const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        };
     
        const getPatient = ()=>{
         axios.get('/patient/all')
@@ -40,30 +53,28 @@ const App = ()=> {
             setPatients((prevPatients) => prevPatients.filter((patient) => patient.id !== id))
         );
        }
-
-       const handleLogin = async () => {
-            try {
-                const response = await axios.post("http://localhost:8081/auth/signin", {
-                email: username,
-                password: password
-                });
-                console.log("Login successful", response.data);
-                localStorage.setItem("token", response.data.jwt);
-            } catch (error) {
-                console.error("Login failed", error);
-            }
-        };
-
-
     
         return (
             <div>
-                <h1>Welcome to React Front End Served by Spring Boot</h1>
-                <LoginComponent/>
-                <SingUpComponent/>
-                <DashboardWelcome user= {user}/>
+                <NavComponent/>
+            
+                {!isLoggedIn ? (
+                            <>
+                                <div id='login'></div><LoginComponent onLoginSuccess={handleLoginSuccess} /></div>
+                                <div id='signup'></div><SingUpComponent /></div>
+                                <div id='logout'></div>
+
+                            </>
+                            ) : (
+                            <>
+                                <DashboardWelcome />
+                                <RegistarPatient addPatient={addPatient} />
+                                <Patients getPatient={getPatient} patients={patients} removePatient={removePatient} />
+                            </>
+                 )}
+                {/* <DashboardWelcome/>
                 <RegistarPatient addPatient={addPatient}/>
-                <Patients getPatient={getPatient} patients={patients} removePatient={removePatient}/>
+                <Patients getPatient={getPatient} patients={patients} removePatient={removePatient}/> */}
             </div>
         );
     }

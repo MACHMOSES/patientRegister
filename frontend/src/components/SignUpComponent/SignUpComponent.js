@@ -39,18 +39,18 @@ const SingUpComponent = () =>{
                 <div>
                     <h2 className="mb-4 text-center">Sign Up Page</h2>
                     {error && <p className="text-danger">{error}</p>}
-                    <input  id='fullName' placeholder={"Full Name"} value={fullName} type='text'
+                    <input placeholder={"Full Name"} value={fullName} type='text'
                               onChange={(e) => setFullName(e.target.value)}/>
-                    <input  id='username' placeholder={"Full Name"} value={username} type='text'
+                    <input placeholder={"Full Name"} value={username} type='text'
                               onChange={(e) => setUsername(e.target.value)}/>
-                    <input  placeholder='Email Address' id='email' value={email} type='email'
+                    <input  placeholder='Email Address' value={email} type='email'
                               onChange={(e) => setEmail(e.target.value)}/>
-                    <input  placeholder='Password' id='password' type='password' value={password}
+                    <input  placeholder='Password' type='password' value={password}
                               onChange={(e) => setPassword(e.target.value)}/>
-                    <input  placeholder='Confirm Password' id='confirmPassword' type='password'
+                    <input  placeholder='Confirm Password' type='password'
                               value={confirmPassword}
                               onChange={(e) => setConfirmPassword(e.target.value)}/>
-                    <input  placeholder='Mobile Number' id='mobileNumber' value={phoneNumber}
+                    <input  placeholder='Mobile Number' value={phoneNumber}
                               type='text'
                               onChange={(e) => setphoneNumber(e.target.value)}/>
                     <select className="form-select mb-4" value={role} onChange={(e) => setRole(e.target.value)}>
@@ -63,7 +63,7 @@ const SingUpComponent = () =>{
                     </button>
 
                     <div className="text-center">
-                        <p>Already Register? <a href="/">Login</a></p>
+                        <p>Already Register? <a href="login">Login</a></p>
                     </div>
                 </div>
             </div>
