@@ -22,6 +22,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String confirmPassword;
     private String role;
 
     public Long getId(){
@@ -72,4 +73,11 @@ public class User {
         this.role = role;
     }
 
+     public String getConfirmPassword(){
+        return role;
+    }
+
+    public void setConfirmPassword( String role){
+        this.role = role;
+    }
 }

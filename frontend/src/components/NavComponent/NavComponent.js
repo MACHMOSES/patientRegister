@@ -25,9 +25,7 @@ const NavComponent = () =>{
                                     <li className='nav-item'><a href='#work' className='nav-link'>work</a></li>
                                     <li className='nav-item'><a href='#contact' className='nav-link bt bt-bg-primary' >contact</a></li>
                                     <li className='nav-item'><a href='#about' className='nav-link bt bt-bg-primary' >about</a></li>
-                                    <li className='nav-item'><a href='#singup' className='nav-link'>Signup</a></li>
-                                    <li className='nav-item'><a href='#login' className='nav-link'>login</a></li>
-                                    <li className='nav-item'><a href='#login' className='nav-link' onClick={(e) => {e.preventDefault(); handleLogout();}}>Logo</a></li>
+                                    <li className='nav-item'><a href='#login' className='nav-link' onClick={(e) => {e.preventDefault(); handleLogout();}}>Logout</a></li>
                             </ul>
                         </div>
                         

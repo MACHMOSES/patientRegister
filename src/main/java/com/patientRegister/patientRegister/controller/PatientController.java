@@ -9,16 +9,19 @@ import com.patientRegister.patientRegister.response.AuthResponse;
 import com.patientRegister.patientRegister.services.UserServiceImplementation;
 import org.springframework.security.core.Authentication;
 import java.util.Optional;
-
+import java.util.Map;
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +39,8 @@ public class PatientController {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private UserServiceImplementation customUserDetails;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     
     public PatientController(PatientRepository patientRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.patientRepository = patientRepository;
@@ -97,16 +102,6 @@ public class PatientController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login"; //login.html
-    }
-
-    @GetMapping("/register")
-    public String registerForm() {
-        return "registar";//registaer.html
-    }
-
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
        
@@ -115,12 +110,6 @@ public class PatientController {
         
         return ResponseEntity.ok(user);
     }
-
-    @GetMapping("/welcome")
-    public String welcome() {
-        return "welcome"; //welcome.html
-    }
-    
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)  {
@@ -132,6 +121,7 @@ public class PatientController {
         Optional<User> isEmailExist = userRepository.findByEmail(email);
         
         if (isEmailExist.isPresent()) {
+        
              throw new RuntimeException("Email is already used");
         }
     
@@ -141,9 +131,10 @@ public class PatientController {
         createdUser.setRole(role);
         createdUser.setPassword(passwordEncoder.encode(password));
         
-        User savedUser = userRepository.save(createdUser);
-        userRepository.save(savedUser);
-        Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);
+        // User savedUser = 
+        userRepository.save(createdUser);
+        // userRepository.save(savedUser);
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email,password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = JwtProvider.generateToken(authentication);
 
@@ -159,12 +150,12 @@ public class PatientController {
     
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> signin(@RequestBody User loginRequest) {
-        String username = loginRequest.getEmail();
+        String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        System.out.println(username+"-------"+password);
+        System.out.println(email+"-------"+password);
 
-        Authentication authentication = authenticate(username,password);
+        Authentication authentication = authenticate(email, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = JwtProvider.generateToken(authentication);
@@ -180,11 +171,11 @@ public class PatientController {
 
 
     
-    private Authentication authenticate(String username, String password) {
+    private Authentication authenticate(String email, String password) {
 
-        System.out.println(username+"---++----"+password);
+        System.out.println(email+"---++----"+password);
 
-        UserDetails userDetails = customUserDetails.loadUserByUsername(username);
+        UserDetails userDetails = customUserDetails.loadUserByUsername(email);
 
         System.out.println("Sig in in user details"+ userDetails);
 
@@ -202,6 +193,7 @@ public class PatientController {
         return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
 
     }
+
     
     
 
