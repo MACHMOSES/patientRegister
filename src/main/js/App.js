@@ -20,7 +20,7 @@ const App = () => {
 
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token", token);
-    setIsLoggedIn(true);
+    setIsLoggedIn(token);
   };
 
   const handleLogout = () => {
@@ -59,7 +59,7 @@ const App = () => {
             <div id="login">
                 <LoginComponent
                     onLoginSuccess={handleLoginSuccess}
-                    onShowSignup={() => setShowSignup(false)} // 👈 this is the key
+                    onShowSignup={() => setShowSignup(false)} // this is the key
                 />
             </div>
             
@@ -67,7 +67,7 @@ const App = () => {
           ) : (
 
             <div id="signup">
-              <SignUpComponent onBackToLogin={() => setShowSignup(true)} />
+              <SignUpComponent onBackToLogin={() => setShowSignup(true)} onSignupSuccess={handleLoginSuccess} />
             </div>
           )}
         </>

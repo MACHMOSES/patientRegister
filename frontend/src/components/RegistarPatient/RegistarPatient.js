@@ -40,24 +40,43 @@ const RegistarPatient = ({addPatient}) =>{
     
 
     return(
-        <div className='container'>
-            <form onSubmit={onSubmit}>
+        <div className='container d-flex justify-content-center align-items-center '>
+            <form onSubmit={onSubmit} style={{ width: "700px", height: "auto" }}>
                 <div></div>
                 <InputComponent label ="gender">
-                    <input
-                    type = "radio"
-                    name = "gender"
-                    value="MALE"
-                    checked ={patient.gender === "MALE"}
-                    onChange={handleInputChange}
-                    />
-                    <input
-                    type = "radio"
-                    name = "gender"
-                    value="FEMALE"
-                    checked ={patient.gender === "FEMALE"}
-                    onChange={handleInputChange}
-                    />
+
+                    <div className="d-flex gap-3">
+                        <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="gender"
+                            value="MALE"
+                            checked={patient.gender === "MALE"}
+                            onChange={handleInputChange}
+                            id="genderMale"
+                        />
+                        <label className="form-check-label" htmlFor="genderMale">
+                            Male
+                        </label>
+                        </div>
+
+                        <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="gender"
+                            value="FEMALE"
+                            checked={patient.gender === "FEMALE"}
+                            onChange={handleInputChange}
+                            id="genderFemale"
+                        />
+                        <label className="form-check-label" htmlFor="genderFemale">
+                            Female
+                        </label>
+                        </div>
+                    </div>
+
                 </InputComponent>
                 <InputComponent label = "date">
                     <input
@@ -70,6 +89,7 @@ const RegistarPatient = ({addPatient}) =>{
                 <InputComponent label= "phoneNumber">
                     <input
                     type = "tel"
+                    placeholder='Phone Number'
                     name = "phoneNumber"
                     value={patient['phoneNumber']}
                     onChange={handleInputChange}
@@ -116,7 +136,7 @@ const RegistarPatient = ({addPatient}) =>{
                         onChange={handleInputChange}
                     />
                 </InputComponent>
-                <button type='submit'>submit</button>
+                <button className='rounded' type='submit'>submit</button>
             </form>
 
         </div>

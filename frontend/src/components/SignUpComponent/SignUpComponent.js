@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import axios from "axios";
 
-const SingUpComponent = ({ onBackToLogin }) => {
+const SingUpComponent = ({ onBackToLogin, onSignupSuccess }) => {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,8 @@ const SingUpComponent = ({ onBackToLogin }) => {
         return;
       }
       if (password !== confirmPassword) {
-        throw new Error("Please enter password that match");
+        // throw new Error("Please enter password that match");
+        setError("Please enter password that match");
       }
 
       const response = await axios.post("http://localhost:8080/signup", {
@@ -32,12 +33,16 @@ const SingUpComponent = ({ onBackToLogin }) => {
       });
 
       console.log(response.data);
+
+      localStorage.setItem("token", response.data.jwt);
+      onSignupSuccess(response.data.jwt);
     } catch (error) {
       console.error(
         "Signup failed;",
         error.response ? error.response.data : error.message
       );
-      setError(error.response ? error.response.data : error.message);
+      //   setError(error.response ? error.response.data : error.message);
+      setError(error.response?.data?.message || "Something went wrong");
     }
   };
   return (
@@ -60,7 +65,7 @@ const SingUpComponent = ({ onBackToLogin }) => {
           <input
             className="mb-4 d-block mx-auto btn-primary"
             style={{ height: "40px", width: "100%" }}
-            placeholder={"Full Name"}
+            placeholder={"username"}
             value={username}
             type="text"
             onChange={(e) => setUsername(e.target.value)}
@@ -98,12 +103,14 @@ const SingUpComponent = ({ onBackToLogin }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <select
-            className="form-select mb-4"
+             className="form-select mb-4"
+            style={{ width: "200px", display: "block", margin: "0 auto" }}
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
-            <option value="ROLE_CUSTOMER">User</option>
-            <option value="ROLE_ADMIN">Admin</option>
+            <option value="">-- Select Role --</option>
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
           </select>
           <button
             className="mb-4 d-block mx-auto fixed-action-btn btn-primary"
@@ -114,13 +121,14 @@ const SingUpComponent = ({ onBackToLogin }) => {
           </button>
 
           <div className="text-center">
+            <div>{error && <span style={{ color: "red" }}>{error}</span>}</div>
             <p>
-              Already Register?{" "}
+              Already Register?
               <a
                 href="#"
                 onClick={(e) => {
                   e.preventDefault(); // stop browser reload
-                  onBackToLogin(); // 👈 call parent to show LoginComponent
+                  onBackToLogin(); //  call parent to show LoginComponent
                 }}
               >
                 Login

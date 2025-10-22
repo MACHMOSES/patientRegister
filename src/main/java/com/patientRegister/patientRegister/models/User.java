@@ -74,10 +74,10 @@ public class User {
     }
 
      public String getConfirmPassword(){
-        return role;
+        return confirmPassword;
     }
 
-    public void setConfirmPassword( String role){
-        this.role = role;
+    public void setConfirmPassword( String confirmPassword){
+        this.confirmPassword = confirmPassword;
     }
 }

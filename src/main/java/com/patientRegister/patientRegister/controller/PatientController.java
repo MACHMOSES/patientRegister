@@ -102,14 +102,14 @@ public class PatientController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    // @PostMapping("/register")
+    // public ResponseEntity<User> registerUser(@RequestBody User user) {
        
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    //     user.setPassword(passwordEncoder.encode(user.getPassword()));
+    //     userRepository.save(user);
         
-        return ResponseEntity.ok(user);
-    }
+    //     return ResponseEntity.ok(user);
+    // }
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)  {
