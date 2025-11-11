@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import PatientInformation from '../patientInformation/PatientInformation';
+import PatientInformation from '../PatientInformation/PatientInformation';
 
 const Patients = ({getPatient, removePatient, patients}) => {
     return(

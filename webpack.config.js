@@ -1,62 +1,62 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // Set the mode to 'development' or 'production'
-  mode: 'development', 
+  mode: "production",  // Changed from "development" for optimized, production-ready builds
 
-  // Entry point of your React application
-  entry: './src/main/js/App.js', 
+  entry: "./src/main/js/index.js",
 
-  devtool: 'source-map',
+  // devtool: "source-map",  // Commented out for production (removes source maps to reduce bundle size)
 
-  // Output configuration for the bundled files
   output: {
-    // Path where the bundled files will be placed (Spring Boot static resources)
-    path: path.resolve(__dirname, './target/classes/static/built/'), 
-    filename: 'bundle.js', // Name of the bundled JavaScript file
-    publicPath: '/built/', // Public path for assets within the bundle
+    path: path.resolve(__dirname, "./build/"),
+    filename: "bundle.js",
+    publicPath: "/build/",
   },
 
-  // Configuration for the development server (for React development)
-  devServer: {
-    port: 3000, // Port for the React development server
-    proxy: {
-      '/api': 'http://localhost:8080' // Proxy API requests to Spring Boot backend
-    },
-    historyApiFallback: true, // Handle client-side routing
-  },
+  // devServer: { ... },  // Commented out for production builds (not needed in Docker)
 
-  // Module rules for handling different file types
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/, // Process .js and .jsx files
-        exclude: /node_modules/, // Exclude node_modules
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Use Babel for transpilation
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'], // Babel presets for ES6 and React
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
       {
-        test: /\.css$/, // Process .css files
-        use: ['style-loader', 'css-loader'], // Use style-loader and css-loader
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      // Added rules for .json and .wasm (Webpack 5 built-in support)
+      {
+        test: /\.json$/,
+        type: "json",
+      },
+      {
+        test: /\.wasm$/,
+        type: "webassembly/async",
       },
     ],
   },
 
-  // Plugins for additional functionalities
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/main/resources/static/index.html', // Path to your HTML template
-      filename: 'index.html', // Output filename relative to output.path
-    }), 
+      template: "./src/main/resources/static/index.html",
+      filename: "index.html",
+    }),
   ],
 
-  // Resolve extensions for easier imports
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
+  },
+
+  // Added for WebAssembly support if needed
+  experiments: {
+    asyncWebAssembly: true,
   },
 };

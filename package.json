@@ -1,9 +1,9 @@
 {
   "name": "patientregister",
   "version": "1.0.0",
-  "main": "App.js",
+  "main": "index.js",
   "scripts": {
-    "watch": "webpack --watch  --mode development --devtool source-map  --output-path ./target/classes/static/built --output-filename bundle.js"
+    "build": "webpack  --mode production --output-path ./build --output-filename bundle.js"
   },
   "keywords": [],
   "author": "",
