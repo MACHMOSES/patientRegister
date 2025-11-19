@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "webpack  --mode production --output-path ./build --output-filename bundle.js"
+    "build": "webpack  --mode production "
   },
   "keywords": [],
   "author": "",

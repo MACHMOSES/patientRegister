@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebMain {
     @RequestMapping(value = "/")
     public String index() {
-        return "forward:/index.html";
+        return "forward:/build/index.html";
     }
     
     

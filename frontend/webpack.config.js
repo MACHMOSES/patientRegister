@@ -4,14 +4,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "production",  // Changed from "development" for optimized, production-ready builds
 
-  entry: "./src/main/js/index.js",
+  entry: "./src/js/index.js",
 
   // devtool: "source-map",  // Commented out for production (removes source maps to reduce bundle size)
 
   output: {
-    path: path.resolve(__dirname, "./build/"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/build/",
+    clean: true,
   },
 
   // devServer: { ... },  // Commented out for production builds (not needed in Docker)
@@ -46,7 +46,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/main/resources/static/index.html",
+      template: "./public/index.html",
       filename: "index.html",
     }),
   ],
@@ -58,5 +58,9 @@ module.exports = {
   // Added for WebAssembly support if needed
   experiments: {
     asyncWebAssembly: true,
+  },
+  devServer: {
+    port: 3000, // For local dev (run with npm start)
+    historyApiFallback: true, // For React Router
   },
 };

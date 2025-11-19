@@ -6,12 +6,12 @@ import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./main.css";
-import Patients from "../../../frontend/src/components/Patients/Patients";
-import RegistarPatient from "../../../frontend/src/components/RegistarPatient/RegistarPatient";
-import SignUpComponent from "../../../frontend/src/components/SignUpComponent/SignUpComponent";
-import LoginComponent from "../../../frontend/src/components/LoginComponent.js/LoginComponent";
-import DashboardWelcome from "../../../frontend/src/components/Dashboard/DashboardWelcome";
-import NavComponent from "../../../frontend/src/components/NavComponent/NavComponent";
+import Patients from "../components/Patients/Patients";
+import RegistarPatient from "../components/RegistarPatient/RegistarPatient";
+import SignUpComponent from "../components/SignUpComponent/SignUpComponent";
+import LoginComponent from "../components/LoginComponent.js/LoginComponent";
+import DashboardWelcome from "../components/Dashboard/DashboardWelcome";
+import NavComponent from "../components/NavComponent/NavComponent";
 
 const App = () => {
   const [patients, setPatients] = useState([]);
